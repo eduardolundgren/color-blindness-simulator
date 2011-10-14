@@ -5,6 +5,8 @@ function [imgOut] = convertToDichromatImage(img, method)
 				3.45565 27.1554 3.86714;...
 				0.0299566 0.184309 1.46709 ];
 
+	RGB_LMS_INV = inv(RGB_LMS);
+
 	LMS_DEUTRAN = [ 1 0 0;...
 					0.494207 0 1.24827;...
 					0 0 1 ];
@@ -25,7 +27,7 @@ function [imgOut] = convertToDichromatImage(img, method)
 
 	for y = 1:rmax;
 		for x = 1:cmax;
-			rgb = double(img(x, y, :));
+			rgb = double(img(y, x, :));
 
 			RGB = [rgb(1), rgb(2), rgb(3)];
 
@@ -33,8 +35,8 @@ function [imgOut] = convertToDichromatImage(img, method)
 
 			LMSt = T*LMS;
 
-			RGBt = inv(RGB_LMS)*LMSt;
+			RGBt = RGB_LMS_INV*LMSt;
 
-			imgOut(x, y, :) = RGBt/255;
+			imgOut(y, x, :) = RGBt/255;
 		end
 	end
