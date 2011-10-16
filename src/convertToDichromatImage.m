@@ -23,7 +23,7 @@ function [imgOut] = convertToDichromatImage(img, method)
 
 	[rmax, cmax, zmax] = size(img);
 
-	imgOut = zeros(rmax, cmax, zmax);
+	imgOut = img;
 
 	for y = 1:rmax;
 		for x = 1:cmax;
@@ -31,12 +31,12 @@ function [imgOut] = convertToDichromatImage(img, method)
 
 			RGB = [rgb(1), rgb(2), rgb(3)];
 
-			LMS = RGB_LMS*double(RGB');
+			LMS = RGB_LMS*RGB';
 
 			LMSt = T*LMS;
 
 			RGBt = RGB_LMS_INV*LMSt;
 
-			imgOut(y, x, :) = RGBt/255;
+			imgOut(y, x, :) = RGBt;
 		end
 	end
