@@ -21,13 +21,13 @@ function [imgOut] = convertToDichromatImage(img, method)
 		T = LMS_PROTAN;
 	end
 
-	[rmax, cmax, zmax] = size(img);
+	[rows, cols, z] = size(img);
 
 	imgOut = img;
 
-	for y = 1:rmax;
-		for x = 1:cmax;
-			rgb = double(img(y, x, :));
+	for i = 1:rows;
+		for j = 1:cols;
+			rgb = double(img(i, j, :));
 
 			RGB = [rgb(1), rgb(2), rgb(3)];
 
@@ -37,6 +37,6 @@ function [imgOut] = convertToDichromatImage(img, method)
 
 			RGBt = RGB_LMS_INV*LMSt;
 
-			imgOut(y, x, :) = RGBt;
+			imgOut(i, j, :) = RGBt;
 		end
 	end

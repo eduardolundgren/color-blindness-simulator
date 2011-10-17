@@ -1,4 +1,4 @@
-img = imread('../assets/2.jpg');
+img = imread('../assets/cimage1.jpg');
 
 imshow(img, []);
 title('Original');
